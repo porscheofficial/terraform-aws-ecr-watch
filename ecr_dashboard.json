@@ -1,0 +1,63 @@
+{
+    "start": "-P1M",
+    "widgets": [
+        {
+            "type": "log",
+            "x": 0,
+            "y": 0,
+            "width": 24,
+            "height": 6,
+            "properties": {
+                "query": "SOURCE '${aws_cloudwatch_cloudtrail_log_group}' | filter @logStream = '${account_id}_CloudTrail_${aws_region}'\n\n\n\n | filter eventName = 'BatchGetImage'\n\n\n\n | fields @timestamp, @message\n\n\n\n | stats count(*) as apiCalls by userIdentity.accountId as accountId,\n\nrequestParameters.repositoryName as repository\n| sort accountId desc",
+                "region": "eu-central-1",
+                "title": "Images per Accounts",
+                "view": "table"
+            }
+        },
+        {
+            "type": "log",
+            "x": 0,
+            "y": 6,
+            "width": 12,
+            "height": 6,
+            "properties": {
+                "query": "SOURCE '${aws_cloudwatch_cloudtrail_log_group}' | filter @logStream = '${account_id}_CloudTrail_${aws_region}'\n\n\n\n\n\n\n\n | filter eventName = 'BatchGetImage'\n\n\n\n\n\n\n\n | fields @timestamp, @message\n\n\n\n\n\n\n\n | stats count_distinct(requestParameters.repositoryName) as Images by\nuserIdentity.accountId as accountId\n\n\n| sort Images desc",
+                "region": "eu-central-1",
+                "title": "Usage by Accounts",
+                "view": "pie",
+                "legend": {
+                    "position": "left"
+                }
+            }
+        },
+        {
+            "type": "log",
+            "x": 12,
+            "y": 6,
+            "width": 12,
+            "height": 6,
+            "properties": {
+                "query": "SOURCE '${aws_cloudwatch_cloudtrail_log_group}' | filter @logStream = '${account_id}_CloudTrail_${aws_region}'\n\n\n\n\n\n\n\n | filter eventName = 'BatchGetImage'\n\n\n\n\n\n\n\n | fields @timestamp, @message\n\n\n\n\n\n\n\n | stats count_distinct(userIdentity.accountId) as Accounts by requestParameters.repositoryName as imageName \n\n\n| sort Accounts desc",
+                "region": "eu-central-1",
+                "title": "ECR Repositories Usage",
+                "view": "pie",
+                "legend": {
+                    "position": "left"
+                }
+            }
+        },
+        {
+            "type": "log",
+            "x": 0,
+            "y": 12,
+            "width": 24,
+            "height": 6,
+            "properties": {
+                "query": "SOURCE '${aws_cloudwatch_cloudtrail_log_group}' | filter @logStream = '${account_id}_CloudTrail_${aws_region}'\n\n\n\n | filter eventName = 'BatchGetImage'\n\n\n\n | fields @timestamp, @message\n\n\n\n | stats count(*) as apiCalls by userIdentity.accountId as accountId,\n\nrequestParameters.repositoryName as repository, coalesce(requestParameters.imageIds.0.imageTag, requestParameters.imageIds.0.imageDigest) as tag\n| sort accountId desc",
+                "region": "eu-central-1",
+                "title": "Images and tags per accounts",
+                "view": "table"
+            }
+        }
+    ]
+}
