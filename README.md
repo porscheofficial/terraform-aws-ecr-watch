@@ -1,6 +1,6 @@
 # ecr-watch
 
-Terraform module to configure an AWS ECR Usage Dashboard based on AWS CloudWatch log insight queries with data fetched from AWS ClouTrail.
+Terraform module to configure an AWS ECR Usage Dashboard based on AWS CloudWatch log insight queries with data fetched from AWS CloudTrail.
 
 The Cloudwatch Dashboard includes the following widgets:
   * Images per Accounts
