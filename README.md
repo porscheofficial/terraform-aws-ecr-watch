@@ -2,6 +2,8 @@
 
 Terraform module to configure an AWS ECR Usage Dashboard based on AWS CloudWatch log insight queries with data fetched from AWS CloudTrail.
 
+![STATUS](https://github.com/porscheofficial/ecr-watch/actions/workflows/.github/workflows/main.yml/badge.svg)
+
 The Cloudwatch Dashboard includes the following widgets:
   * Images per Accounts
   * Usage by Accounts
