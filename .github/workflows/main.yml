@@ -1,0 +1,22 @@
+name: Terraform Security Check
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - README.md
+  workflow_dispatch:
+
+jobs:
+  verify:
+    name: Lint and analyse code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v2.0.0
+        with:
+          terraform_version: ~> 1.4.5
+      - name: Lint Terraform code
+        run: terraform fmt -check=true -diff=true
+      - name: Scan Terraform code
+        uses: aquasecurity/tfsec-action@v1.0.0
