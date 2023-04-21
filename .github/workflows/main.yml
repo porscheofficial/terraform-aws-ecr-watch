@@ -3,11 +3,11 @@ name: Terraform Security Check
 on:
   push:
     branches: [ main ]
-    paths:
-      - !README.md
-      - !LICENSE
-      - !.github/PULL_REQUEST_TEMPLATE.md
-      - !CONTRIBUTION.md
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - '.github/PULL_REQUEST_TEMPLATE.md'
+      - 'CONTRIBUTION.md'
   pull_request:
     branches: [ main ]
   workflow_dispatch:
