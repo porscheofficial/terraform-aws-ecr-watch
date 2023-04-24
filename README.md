@@ -10,6 +10,8 @@ The Cloudwatch Dashboard includes the following widgets:
   * ECR Repositories Usage
   * Images and tags per accounts
 
+<img src="https://github.com/porscheofficial/ecr-watch/blob/main/images/ecr-watch.png?raw=true" />
+
 ## Usage
 ### Module call for ecr-watch
 
