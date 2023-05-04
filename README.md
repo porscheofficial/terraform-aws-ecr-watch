@@ -15,18 +15,11 @@ The Cloudwatch Dashboard includes the following widgets:
 ## Usage
 ### Module call for ecr-watch
 
-* Clone the repository in your Terraform modules folders:
-
-```bash
-cd <path/to/modules>
-git clone git@github.com:porscheofficial/ecr-watch.git
-```
-
 * Call the module as follows
 
 ```hcl
 module "ecr-watch" {
-    source = "<path/to/modules>/ecr-watch"
+    source = "github.com/porscheofficial/terraform-aws-ecr-watch"
     aws_cloudwatch_cloudtrail_log_group = "<cloudtrail/log_group/path>"
     aws_region = <aws-region>
 }
